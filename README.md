@@ -1,6 +1,6 @@
 # Unity_AlphaBloom
 
-<img src="https://github.com/XJINE/Unity_AlphaBloom/blob/master/Screenshot.jpg" width="100%" height="auto" />
+<img src="https://github.com/XJINE/Unity_AlphaBloom/blob/master/Screenshot.png" width="100%" height="auto" />
 
 This bloom effect considers alpha value.
 

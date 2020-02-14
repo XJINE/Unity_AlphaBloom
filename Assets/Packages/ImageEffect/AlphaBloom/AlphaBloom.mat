@@ -9,8 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: AlphaBloom
   m_Shader: {fileID: 4800000, guid: d0e73f0f610e6cf4ab19370e082b112a, type: 3}
-  m_ShaderKeywords: _COMPOSITE_TYPE_ADDITIVE _DITHER_BAYER _DITHER_TYPE_BAYER _TYPE_BAYER
-    _TYPE_DITHER_DOT
+  m_ShaderKeywords: _DITHER_BAYER _DITHER_TYPE_BAYER _TYPE_BAYER _TYPE_DITHER_DOT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -85,4 +84,4 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Parameter: {r: 0.35, g: 4, b: 8, a: 0}
+    - _Parameter: {r: 2, g: 0.4, b: 5, a: 8}

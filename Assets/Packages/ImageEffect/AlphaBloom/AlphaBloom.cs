@@ -25,11 +25,12 @@ public class AlphaBloom : ImageEffectBase
 
     public AlphaBloom.CompositeType compositeType = AlphaBloom.CompositeType._COMPOSITE_TYPE_ADDITIVE;
 
-    [Range(0,  1)] public float threshold = 1;
-    [Range(0, 30)] public float intensity = 1;
-    [Range(1, 10)] public float size      = 1;
-    [Range(1, 10)] public int   divide    = 3;
-    [Range(1,  5)] public int   iteration = 5;
+    [Range(0,  10)] public float peek      = 1;
+    [Range(0,   1)] public float threshold = 1;
+    [Range(0, 100)] public float intensity = 1;
+    [Range(1,  10)] public float size      = 1;
+    [Range(1,  10)] public int   divide    = 3;
+    [Range(1,   5)] public int   iteration = 5;
 
     private int idCompositeTex   = 0;
     private int idParameter      = 0;
@@ -47,15 +48,16 @@ public class AlphaBloom : ImageEffectBase
 
     protected override void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        RenderTexture resizedTex1 = RenderTexture.GetTemporary(source.width  / this.divide,
+        RenderTexture resizedTex1 = RenderTexture.GetTemporary(source.width / this.divide,
                                                                source.height / this.divide,
-                                                               0);
+                                                               0,
+                                                               RenderTextureFormat.DefaultHDR);
         RenderTexture resizedTex2 = RenderTexture.GetTemporary(resizedTex1.descriptor);
 
         // STEP:0
         // Get resized birghtness image.
 
-        base.material.SetVector(this.idParameter, new Vector3(this.threshold, this.intensity, this.size));
+        base.material.SetVector(this.idParameter, new Vector4(this.peek, this.threshold, this.intensity, this.size));
 
         Graphics.Blit(source, resizedTex1, base.material, 0);
 
@@ -73,7 +75,7 @@ public class AlphaBloom : ImageEffectBase
             Graphics.Blit(resizedTex1, resizedTex2, base.material, 1);
             Graphics.Blit(resizedTex2, resizedTex1, base.material, 2);
 
-            base.material.SetVector(this.idParameter, new Vector3(this.threshold, this.intensity, this.size + i));
+            base.material.SetVector(this.idParameter, new Vector4(this.peek, this.threshold, this.intensity, this.size + i));
         }
 
         // STEP:3

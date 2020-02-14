@@ -8,7 +8,7 @@
         [KeywordEnum(ADDITIVE, SCREEN, DEBUG)]
         _COMPOSITE_TYPE("Composite Type", Float) = 0
 
-        _Parameter("(Threhold, Intensity, SamplingFrequency, -)", Vector) = (0.8, 1.0, 1.0, 0.0)
+        _Parameter("(Peek, Threhold, Intensity, SamplingFrequency)", Vector) = (1.0, 0.8, 1.0, 1.0)
     }
     SubShader
     {
@@ -22,9 +22,10 @@
         float4    _MainTex_TexelSize;
         float4    _Parameter;
 
-        #define BRIGHTNESS_THRESHOLD _Parameter.x
-        #define INTENSITY            _Parameter.y
-        #define SAMPLING_FREQUENCY   _Parameter.z
+        #define BRIGHTNESS_PEEK      _Parameter.x
+        #define BRIGHTNESS_THRESHOLD _Parameter.y
+        #define INTENSITY            _Parameter.z
+        #define SAMPLING_FREQUENCY   _Parameter.w
 
         ENDCG
 
@@ -41,7 +42,8 @@
             fixed4 frag(v2f_img input) : SV_Target
             {
                 float4 color = tex2D(_MainTex, input.uv);
-                return max(color * color.a - BRIGHTNESS_THRESHOLD, 0) * INTENSITY;
+                float4 brightness = max(color * color.a - BRIGHTNESS_THRESHOLD, 0) * INTENSITY;
+                return min(BRIGHTNESS_PEEK, brightness);
             }
 
             ENDCG

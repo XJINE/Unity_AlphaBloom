@@ -26,13 +26,20 @@ static const float SobelFilterKernelV[9] =
 
 static const float4 GaussianFilterKernel[7] =
 {
-    float4(0.0205, 0.0205, 0.0205, 0),
-    float4(0.0855, 0.0855, 0.0855, 0),
-    float4(0.232,  0.232,  0.232,  0),
-    float4(0.324,  0.324,  0.324,  1),
-    float4(0.232,  0.232,  0.232,  0),
-    float4(0.0855, 0.0855, 0.0855, 0),
-    float4(0.0205, 0.0205, 0.0205, 0)
+    //float4(0.0205, 0.0205, 0.0205, 0),
+    //float4(0.0855, 0.0855, 0.0855, 0),
+    //float4(0.232,  0.232,  0.232,  0),
+    //float4(0.324,  0.324,  0.324,  1),
+    //float4(0.232,  0.232,  0.232,  0),
+    //float4(0.0855, 0.0855, 0.0855, 0),
+    //float4(0.0205, 0.0205, 0.0205, 0)
+    float4(0.0205, 0.0205, 0.0205, 0.0205),
+    float4(0.0855, 0.0855, 0.0855, 0.0855),
+    float4(0.232,  0.232,  0.232,  0.232),
+    float4(0.324,  0.324,  0.324,  0.324),
+    float4(0.232,  0.232,  0.232,  0.232),
+    float4(0.0855, 0.0855, 0.0855, 0.0855),
+    float4(0.0205, 0.0205, 0.0205, 0.0205)
 };
 
 static const float LaplacianFilterKernel[9] =
@@ -167,8 +174,7 @@ float4 GaussianFilter(sampler2D tex, float4 texST, float2 texCoord, float2 offse
 
     for(int i = 0; i < 7; i++)
     {
-        color += tex2D(tex, UnityStereoScreenSpaceUVAdjust(texCoord, texST))
-               * GaussianFilterKernel[i];
+        color += tex2D(tex, UnityStereoScreenSpaceUVAdjust(texCoord, texST)) * GaussianFilterKernel[i];
 
         texCoord += offset;
     }

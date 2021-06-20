@@ -78,6 +78,12 @@ public class AlphaBloom : ImageEffectBase
             base.material.SetVector(this.idParameter, new Vector4(this.peek, this.threshold, this.intensity, this.size + i));
         }
 
+        // DEBUG:
+        // Graphics.Blit(resizedTex1, destination ,base.material, 0);
+        // RenderTexture.ReleaseTemporary(resizedTex1);
+        // RenderTexture.ReleaseTemporary(resizedTex2);
+        // return;
+
         // STEP:3
         // Composite.
 

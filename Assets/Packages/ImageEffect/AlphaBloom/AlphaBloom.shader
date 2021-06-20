@@ -72,7 +72,7 @@
         {
             CGPROGRAM
 
-            #pragma vertex vert
+            #pragma vertex   vert
             #pragma fragment frag_gaussian
 
             v2f_gaussian vert(appdata_img v)
@@ -137,6 +137,17 @@
                 return saturate(mainColor + compositeColor);
 
                 #else
+
+                float alpha = saturate(compositeColor.a) * 0.98;
+
+                //return alpha;
+
+                //return saturate(float4(1, 0, 0, 1) * alpha + float4(0, 1, 0, 1) * (1.2 - alpha));
+
+                if (mainColor.a == 0) { return mainColor; }
+
+                return saturate(compositeColor * alpha + (mainColor + compositeColor) * (1 - alpha));
+
 
                 return compositeColor;
 
